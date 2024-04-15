@@ -1,0 +1,26 @@
+syntax= "proto3";
+package  sql;
+message player_info_array {
+  repeated int64 data=1;
+}
+message player_info_kv_int {
+  // k v 
+  repeated string data=1;
+}
+message player_info_kv_str {
+  repeated string data=1;
+}
+message player_single_info {
+  uint64 guid=1;
+  bytes uuid=2;
+  // 姓名
+  string names=3;
+  //头像
+  int32 avatar=4;	
+}
+message player_info {
+  player_single_info single=1;
+  player_info_array array=2;
+  player_info_kv_int kv_int=3;
+  player_info_kv_str kv_str=4;
+}

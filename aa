@@ -1,0 +1,28 @@
+echo "参数 $#"
+if [ $# -eq 2 ]; then
+if [ "$1" -eq 1 ]; then
+	    echo "参数1等于0 编译动态库"
+	    	cd ../tools2
+		./aa
+		cd ../run
+fi
+fi
+
+file_name="bin"
+#rm -r $file_name
+#mkdir $file_name
+cmake -S . -B $file_name
+cd $file_name
+make 
+
+cp gateway/gateway ../gateway_exe
+cp center/center ../center_exe
+cp login/login ../login_exe
+cp pbout/libpbout.so ../so/libpbout.so
+rm -rf ../head/pb2
+mkdir ../head/pb2
+cp -r ../pbout/*.h ../head/pb2/
+
+
+
+

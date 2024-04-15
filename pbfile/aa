@@ -1,0 +1,20 @@
+
+rm -rf pbout
+mkdir pbout
+
+file_array=($(find . -type f -name '*.proto'))
+
+# 遍历数组
+for file in "${file_array[@]}"
+do
+    echo "处理文件: $file"
+   ./protoc  -I=. --cpp_out=./pbout $file
+done
+rm -rf ../pbout
+cp -r pbout ../
+cp CMakeLists.txt ../pbout/
+
+
+cd .. 
+./ab
+

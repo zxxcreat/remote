@@ -1,0 +1,25 @@
+cd ./head/pb2
+
+file_array=($(find . -type f -name '*.h'))
+# 遍历 file_array 数组中的每个文件
+strs=()
+strs[0]="#ifndef MACRO_PBTOTAL"
+strs[1]="#define MACRO_PBTOTAL"
+
+
+for file in "${file_array[@]}"; do
+    # 如果文件名以 "./" 开头，则移除 "./"
+    if [[ $file == "./"* ]]; then
+	file=${file#./}
+    fi
+	
+	strs+=("#include \"pb2/$file\"")
+done
+strs+=("#endif")
+rm -rf ../pb_total.h
+touch ../pb_total.h
+for str in "${strs[@]}"; do
+    echo "$str"
+	echo "$str" >> ../pb_total.h
+done
+
